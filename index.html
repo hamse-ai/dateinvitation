@@ -1,0 +1,1115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#170d22" />
+    <title>A little date invite ♡</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --night: #170d22;
+        --plum: #261332;
+        --berry: #49205d;
+        --lilac: #d7b8ee;
+        --pink: #f1b7d4;
+        --cream: #fff5fb;
+        --muted: #c5b4ce;
+        --line: #725783;
+        --gold: #f5d89a;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        min-height: 100%;
+        background: var(--night);
+      }
+      body {
+        margin: 0;
+        min-height: 100svh;
+        color: var(--cream);
+        font-family:
+          ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+        background:
+          radial-gradient(ellipse at 50% -10%, #593b6d 0, transparent 46%),
+          radial-gradient(ellipse at 100% 80%, #32173d 0, transparent 40%),
+          linear-gradient(150deg, #1c1026, #120a1a 72%);
+        padding: 22px 16px calc(30px + env(safe-area-inset-bottom));
+        display: flex;
+        justify-content: center;
+        overflow-x: hidden;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+      }
+      .wrap {
+        width: min(100%, 540px);
+        position: relative;
+      }
+      .topline {
+        text-align: center;
+        color: var(--lilac);
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin: 5px 0 13px;
+      }
+      .card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #906da1;
+        border-radius: 28px;
+        padding: 27px 20px 24px;
+        background: linear-gradient(
+          145deg,
+          rgba(61, 36, 75, 0.96),
+          rgba(30, 17, 39, 0.97)
+        );
+        box-shadow:
+          0 24px 70px #08040b99,
+          inset 0 1px 0 #ffffff12;
+      }
+      .card:before {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border: 1px solid #d5b9df26;
+        border-radius: 21px;
+        pointer-events: none;
+      }
+      .sparkle {
+        position: absolute;
+        color: #f1c8e3;
+        opacity: 0.7;
+      }
+      .s1 {
+        top: 25px;
+        right: 30px;
+      }
+      .s2 {
+        top: 95px;
+        left: 18px;
+        font-size: 12px;
+      }
+      .hero {
+        text-align: center;
+        position: relative;
+      }
+      .kitty {
+        width: 87px;
+        height: 76px;
+        margin: 0 auto 12px;
+        position: relative;
+        filter: drop-shadow(0 6px 14px #0b0610aa);
+      }
+      .head {
+        position: absolute;
+        width: 64px;
+        height: 53px;
+        background: #fff8f5;
+        border: 2px solid #d8c3d4;
+        border-radius: 46% 46% 42% 42%;
+        left: 11px;
+        bottom: 2px;
+      }
+      .ear {
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 8px;
+        border-bottom: 24px solid #fff8f5;
+        filter: drop-shadow(0 -1px #d8c3d4);
+      }
+      .ear.left {
+        left: 12px;
+        border-left: 4px solid transparent;
+        border-right: 18px solid transparent;
+        transform: rotate(-13deg);
+      }
+      .ear.right {
+        right: 12px;
+        border-left: 18px solid transparent;
+        border-right: 4px solid transparent;
+        transform: rotate(13deg);
+      }
+      .eye {
+        position: absolute;
+        width: 4px;
+        height: 7px;
+        background: #382a3c;
+        border-radius: 50%;
+        top: 24px;
+      }
+      .eye.l {
+        left: 17px;
+      }
+      .eye.r {
+        right: 17px;
+      }
+      .nose {
+        position: absolute;
+        width: 6px;
+        height: 4px;
+        background: #efbf58;
+        border-radius: 50%;
+        top: 32px;
+        left: 27px;
+      }
+      .whisk {
+        position: absolute;
+        width: 12px;
+        height: 1px;
+        background: #837585;
+        top: 34px;
+      }
+      .whisk.a {
+        left: 1px;
+        transform: rotate(8deg);
+      }
+      .whisk.b {
+        left: 1px;
+        top: 39px;
+        transform: rotate(-8deg);
+      }
+      .whisk.c {
+        right: 1px;
+        transform: rotate(-8deg);
+      }
+      .whisk.d {
+        right: 1px;
+        top: 39px;
+        transform: rotate(8deg);
+      }
+      .bow {
+        position: absolute;
+        z-index: 2;
+        right: 0;
+        top: 2px;
+        width: 32px;
+        height: 25px;
+      }
+      .bow:before,
+      .bow:after {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 20px;
+        background: linear-gradient(140deg, #ffb8d6, #e874ad);
+        border: 1px solid #ffd9e9;
+        border-radius: 70% 30% 65% 35%;
+        top: 1px;
+      }
+      .bow:before {
+        left: 0;
+        transform: rotate(-25deg);
+      }
+      .bow:after {
+        right: 0;
+        transform: scaleX(-1) rotate(-25deg);
+      }
+      .bow i {
+        position: absolute;
+        z-index: 1;
+        width: 9px;
+        height: 9px;
+        background: #f28ab9;
+        border: 1px solid #ffd9e9;
+        border-radius: 50%;
+        left: 11px;
+        top: 8px;
+      }
+      h1 {
+        font-family: Georgia, serif;
+        font-size: clamp(2.05rem, 9vw, 3.25rem);
+        font-weight: 500;
+        line-height: 1.02;
+        letter-spacing: -0.045em;
+        margin: 0 auto 12px;
+        max-width: 420px;
+      }
+      .subtitle {
+        margin: 0 auto;
+        color: #e5d6e9;
+        font-size: 0.99rem;
+        line-height: 1.55;
+        max-width: 355px;
+      }
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 21px 0;
+        color: #e6b9d3;
+      }
+      .divider:before,
+      .divider:after {
+        content: "";
+        height: 1px;
+        flex: 1;
+        background: linear-gradient(90deg, transparent, #a77bb4, transparent);
+      }
+      .question {
+        font-family: Georgia, serif;
+        font-size: 1.17rem;
+        text-align: center;
+        margin: 0 0 15px;
+        color: #fff2fb;
+      }
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        position: relative;
+      }
+      .btn {
+        min-height: 54px;
+        border: 1px solid transparent;
+        border-radius: 16px;
+        padding: 13px 18px;
+        font-weight: 750;
+        cursor: pointer;
+        touch-action: manipulation;
+        transition:
+          transform 0.18s,
+          filter 0.18s,
+          background 0.18s;
+      }
+      .btn:focus-visible,
+      .choice:focus-visible,
+      .slot:focus-visible,
+      .day:focus-visible {
+        outline: 3px solid #f6d692;
+        outline-offset: 3px;
+      }
+      .btn:hover {
+        filter: brightness(1.08);
+      }
+      .yes {
+        background: linear-gradient(135deg, #f3bfdc, #dc9fc7);
+        color: #31163a;
+        box-shadow: 0 7px 22px #d78bb744;
+      }
+      .no {
+        background: #27172f;
+        border-color: #9a78a5;
+        color: #f6e7f1;
+      }
+      .no.wiggle {
+        animation: wiggle 0.38s ease;
+      }
+      @keyframes wiggle {
+        0%,
+        100% {
+          transform: rotate(0);
+        }
+        25% {
+          transform: rotate(-5deg) translateX(-2px);
+        }
+        65% {
+          transform: rotate(4deg) translateX(2px);
+        }
+      }
+      .response {
+        min-height: 24px;
+        text-align: center;
+        color: var(--pink);
+        font-size: 0.9rem;
+        margin: 13px 0 0;
+      }
+      .email-note {
+        text-align: center;
+        color: #d9c4e2;
+        font-size: 0.78rem;
+        line-height: 1.4;
+        margin: 13px auto 0;
+        max-width: 300px;
+      }
+      .email-status {
+        text-align: center;
+        color: #f4d5a0;
+        font-size: 0.78rem;
+        min-height: 18px;
+        margin: 6px 0 0;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .section {
+        margin-top: 24px;
+        position: relative;
+      }
+      .section h2 {
+        font:
+          500 1.45rem Georgia,
+          serif;
+        margin: 0 0 6px;
+      }
+      .hint {
+        color: var(--muted);
+        font-size: 0.88rem;
+        margin: 0 0 14px;
+        line-height: 1.45;
+      }
+      .choices {
+        display: grid;
+        gap: 9px;
+      }
+      .choice {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        text-align: left;
+        width: 100%;
+        min-height: 67px;
+        padding: 12px 14px;
+        border: 1px solid #654873;
+        border-radius: 16px;
+        background: #21132b;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          background 0.2s,
+          transform 0.2s;
+      }
+      .choice:active,
+      .slot:active,
+      .day:active {
+        transform: scale(0.985);
+      }
+      .choice[aria-pressed="true"] {
+        border-color: #edb7d5;
+        background: linear-gradient(100deg, #512b60, #35203f);
+        box-shadow: inset 0 0 0 1px #edb7d533;
+      }
+      .icon {
+        width: 39px;
+        height: 39px;
+        display: grid;
+        place-items: center;
+        flex: none;
+        border-radius: 13px;
+        background: #563367;
+        font-size: 1.23rem;
+      }
+      .choice strong {
+        display: block;
+        font-size: 0.97rem;
+      }
+      .choice small {
+        display: block;
+        color: #cdbbd5;
+        font-size: 0.78rem;
+        margin-top: 3px;
+      }
+      .check {
+        margin-left: auto;
+        color: #f6cee3;
+        font-size: 1.1rem;
+        opacity: 0;
+      }
+      .choice[aria-pressed="true"] .check {
+        opacity: 1;
+      }
+      .days {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .day,
+      .slot {
+        border: 1px solid #694e76;
+        background: #21142a;
+        border-radius: 13px;
+        min-height: 57px;
+        padding: 7px 3px;
+        cursor: pointer;
+      }
+      .birthday-day {
+        width: 100%;
+        margin-top: 9px;
+      }
+      .day span {
+        display: block;
+        color: #cbb9d1;
+        font-size: 0.7rem;
+      }
+      .day strong {
+        display: block;
+        font-size: 0.93rem;
+        margin-top: 2px;
+      }
+      .day[aria-pressed="true"],
+      .slot[aria-pressed="true"] {
+        background: #71477f;
+        border-color: #f0c4df;
+        box-shadow: inset 0 0 0 1px #f0c4df55;
+      }
+      .range-card {
+        border: 1px solid #694e76;
+        background: #21142a;
+        border-radius: 16px;
+        padding: 15px 14px;
+        margin-top: 10px;
+      }
+      .range-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .range-row label {
+        font-size: 0.9rem;
+        color: #ead9ef;
+      }
+      .range-value {
+        font-weight: 750;
+        color: #f4c8e2;
+        font-variant-numeric: tabular-nums;
+      }
+      .range-card input[type="range"] {
+        display: block;
+        width: 100%;
+        height: 42px;
+        margin: 7px 0 0;
+        accent-color: #e7b8df;
+        cursor: pointer;
+        touch-action: pan-y;
+      }
+      .range-card input[type="range"]::-webkit-slider-thumb {
+        width: 23px;
+        height: 23px;
+      }
+      .range-card input[type="range"]::-moz-range-thumb {
+        width: 21px;
+        height: 21px;
+        border: 0;
+        border-radius: 50%;
+        background: #f0c6e3;
+      }
+      .range-note {
+        font-size: 0.78rem;
+        color: #bdaac6;
+        margin: 0;
+      }
+      .time-summary {
+        margin: 12px 0 0;
+        padding: 12px;
+        border-radius: 13px;
+        background: #382342;
+        text-align: center;
+        color: #fff0fb;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+      .share-answer {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin: 10px auto 0;
+        min-height: 45px;
+        padding: 10px 16px;
+        border: 1px solid #a788b6;
+        border-radius: 14px;
+        background: #26182f;
+        color: #f8eafb;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .share-answer:hover {
+        background: #382343;
+      }
+      .maybe {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        margin: 12px auto 0;
+        min-height: 46px;
+        padding: 10px 17px;
+        border: 1px solid #bb91c6;
+        border-radius: 15px;
+        background: #39234a;
+        color: #ffe9f7;
+        font-weight: 750;
+        cursor: pointer;
+        box-shadow: 0 5px 18px #10081766;
+      }
+      .maybe:hover {
+        background: #4a2d5c;
+      }
+      .maybe-options{display:grid;gap:9px;margin:12px auto 0;max-width:340px}
+      .confirm {
+        width: 100%;
+        margin-top: 19px;
+        background: linear-gradient(135deg, #f3bfdc, #daa0ce);
+        color: #31163a;
+        min-height: 55px;
+        border-radius: 16px;
+        font-weight: 800;
+      }
+      .foot {
+        text-align: center;
+        color: #bdaac6;
+        font-size: 0.76rem;
+        margin: 17px 0 0;
+      }
+      .celebrate {
+        text-align: center;
+        padding: 17px 8px 12px;
+        position: relative;
+        min-height: 260px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .celebrate h2 {
+        font:
+          500 clamp(2rem, 9vw, 2.8rem) Georgia,
+          serif;
+        margin: 8px 0;
+        color: #ffe7f6;
+      }
+      .celebrate p {
+        color: #e6d8e9;
+        line-height: 1.55;
+        margin: 5px 0 19px;
+      }
+      .party-icon {
+        font-size: 3.3rem;
+        animation: pop 0.65s cubic-bezier(0.2, 1.6, 0.4, 1);
+      }
+      @keyframes pop {
+        0% {
+          transform: scale(0.2) rotate(-25deg);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1) rotate(0);
+          opacity: 1;
+        }
+      }
+      .confetti {
+        position: absolute;
+        top: -24px;
+        width: 9px;
+        height: 14px;
+        border-radius: 3px;
+        animation: fall 1.8s ease-in forwards;
+        pointer-events: none;
+      }
+      .confetti:nth-child(1) {
+        left: 8%;
+        background: #f3a9ce;
+        animation-delay: 0.05s;
+      }
+      .confetti:nth-child(2) {
+        left: 21%;
+        background: #d9b7f0;
+        animation-delay: 0.3s;
+      }
+      .confetti:nth-child(3) {
+        left: 38%;
+        background: #f5d89a;
+        animation-delay: 0.15s;
+      }
+      .confetti:nth-child(4) {
+        left: 61%;
+        background: #efaed2;
+        animation-delay: 0.42s;
+      }
+      .confetti:nth-child(5) {
+        left: 79%;
+        background: #c6a0e1;
+        animation-delay: 0.1s;
+      }
+      .confetti:nth-child(6) {
+        left: 93%;
+        background: #f5d89a;
+        animation-delay: 0.35s;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(300px) rotate(650deg);
+          opacity: 0;
+        }
+      }
+      .success {
+        text-align: center;
+        padding: 14px 4px 4px;
+      }
+      .success .big {
+        font-size: 3.2rem;
+      }
+      .success h2 {
+        font:
+          500 2rem Georgia,
+          serif;
+        margin: 6px;
+      }
+      .success p {
+        color: #e6d8e9;
+        line-height: 1.55;
+      }
+      .reset {
+        margin-top: 10px;
+        background: transparent;
+        border: 1px solid #8d70a0;
+        border-radius: 12px;
+        padding: 11px 18px;
+        cursor: pointer;
+      }
+      @media (min-width: 500px) {
+        body {
+          padding-top: 42px;
+        }
+        .card {
+          padding: 33px 32px 29px;
+        }
+        .days {
+          grid-template-columns: repeat(7, minmax(0, 1fr));
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *:before,
+        *:after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <p class="topline">a tiny invitation, just for you</p>
+      <article class="card">
+        <span class="sparkle s1">✦</span><span class="sparkle s2">♡</span>
+        <div id="intro">
+          <header class="hero">
+            <div
+              class="kitty"
+              aria-label="a little white kitty with a pink bow"
+              role="img"
+            >
+              <span class="ear left"></span><span class="ear right"></span
+              ><span class="head"
+                ><i class="eye l"></i><i class="eye r"></i><i class="nose"></i
+                ><i class="whisk a"></i><i class="whisk b"></i
+                ><i class="whisk c"></i><i class="whisk d"></i></span
+              ><span class="bow"><i></i></span>
+            </div>
+            <h1>Hello Kitty, be my date?</h1>
+            <p class="subtitle">
+              I have a little evening in mind, and I’d really love to spend it
+              with you. ♡
+            </p>
+          </header>
+          <div class="divider">୨୧</div>
+          <p class="question">So… what do you say?</p>
+          <div class="actions">
+            <button class="btn yes" id="yesBtn">Yes! ♡</button
+            ><button class="btn no" id="noBtn">Nyah!~</button>
+          </div>
+          <p class="response" id="response" aria-live="polite"></p>
+          <div class="maybe-options hidden" id="noOptions" aria-label="Choose a playful reply">
+            <button class="maybe" id="maybeLaterBtn" type="button">Maybe later, pookie 💜</button>
+            <button class="maybe" id="dreamsBtn" type="button">In your dreams, nigga 💀</button>
+          </div>
+          <p class="email-note">Your choice will be sent to me.</p>
+          <p class="email-status" id="emailStatus" aria-live="polite"></p>
+          <p class="foot">No pressure, just a little hope and a bow.</p>
+        </div>
+        <section id="celebration" class="celebrate hidden" aria-live="polite">
+          <span class="confetti"></span><span class="confetti"></span
+          ><span class="confetti"></span><span class="confetti"></span
+          ><span class="confetti"></span><span class="confetti"></span>
+          <div class="party-icon" aria-hidden="true">🎉</div>
+          <h2>Yay, you said yes!</h2>
+          <p>You just made me the happiest 💜</p>
+          <button class="btn yes" id="continueBtn" type="button">
+            Choose our date ♡
+          </button>
+        </section>
+        <section id="planner" class="hidden" aria-labelledby="planTitle">
+          <div class="hero">
+            <div class="divider">୨୧</div>
+            <h2 id="planTitle">Pick our little adventure</h2>
+            <p class="hint">Choose the kind of date you’d enjoy most. Rough costs for two in USD; transport not included.</p>
+          </div>
+          <div class="choices" id="choices">
+            <button
+              class="choice"
+              data-plan="Bowling + snacks"
+              aria-pressed="false"
+            >
+              <span class="icon">🎳</span
+              ><span
+                ><strong>Bowling + snacks</strong
+                ><small>A little friendly competition and treats</small><small class="price">Snacks: budget $10–20; bowling fee: ask Hargeisa Urban Lounge</small></span
+              ><span class="check">♡</span>
+            </button>
+            <button
+              class="choice"
+              data-plan="Café Laasgeel"
+              aria-pressed="false"
+            >
+              <span class="icon">☕</span
+              ><span
+                ><strong>Café Laasgeel</strong
+                ><small>Coffee, something sweet, and a cozy chat</small><small class="price">About $14–22 for two (light food + drinks estimate)</small></span
+              ><span class="check">♡</span>
+            </button>
+            <button
+              class="choice"
+              data-plan="Panorama Gardens"
+              aria-pressed="false"
+            >
+              <span class="icon">🌿</span
+              ><span
+                ><strong>Panorama Gardens</strong
+                ><small>A relaxed garden dinner</small><small class="price">Budget about $20–40 for two; confirm with venue</small></span
+              ><span class="check">♡</span>
+            </button>
+            <button
+              class="choice"
+              data-plan="Hargeisa View / Masale View"
+              aria-pressed="false"
+            >
+              <span class="icon">🌙</span
+              ><span
+                ><strong>Hargeisa View / Masale View</strong
+                ><small>A scenic drive and a lovely view</small><small class="price">Masale View: about $20–60 for two; Hargeisa View: ask venue</small></span
+              ><span class="check">♡</span>
+            </button>
+            <button
+              class="choice"
+              data-plan="One4Seven Restaurant"
+              aria-pressed="false"
+            >
+              <span class="icon">🍽️</span
+              ><span
+                ><strong>One4Seven Restaurant</strong
+                ><small>Outdoor seating and dinner together</small><small class="price">About $25–45 for two (menu-based estimate)</small></span
+              ><span class="check">♡</span>
+            </button>
+            <button
+              class="choice"
+              data-plan="Papparoti Somaliland"
+              aria-pressed="false"
+            >
+              <span class="icon">🍰</span
+              ><span
+                ><strong>Papparoti Somaliland</strong
+                ><small>Coffee, dessert, and an easygoing date</small><small class="price">About $12–18 for two (older menu; confirm)</small></span
+              ><span class="check">♡</span>
+            </button>
+            <button class="choice" data-plan="Surprise me" aria-pressed="false">
+              <span class="icon">🎁</span
+              ><span
+                ><strong>Surprise me</strong
+                ><small>You pick the details, I’ll bring the smile</small></span
+              ><span class="check">♡</span>
+            </button>
+          </div>
+          <div class="section">
+            <h2>Pick a day</h2>
+            <p class="hint">Choose any day that works for you.</p>
+            <div
+              class="days"
+              id="days"
+              role="group"
+              aria-label="Choose a date"
+            ></div>
+            <button class="day birthday-day" id="birthdayDay" type="button" aria-pressed="false"><span>orrr your birthday</span><strong>Oct 31st 🎂</strong></button>
+          </div>
+          <div class="section">
+            <h2>What time works?</h2>
+            <p class="hint">
+              Slide to choose the time you’d like to arrive and head home.
+            </p>
+            <div class="range-card">
+              <div class="range-row">
+                <label for="startRange">From</label
+                ><output class="range-value" id="startLabel" for="startRange"
+                  >5:30 PM</output
+                >
+              </div>
+              <input
+                id="startRange"
+                type="range"
+                min="15"
+                max="21.5"
+                step="0.5"
+                value="17.5"
+                aria-label="Choose the start time"
+              />
+              <p class="range-note">
+                3:00 PM <span style="float: right">9:30 PM</span>
+              </p>
+            </div>
+            <div class="range-card">
+              <div class="range-row">
+                <label for="endRange">To</label
+                ><output class="range-value" id="endLabel" for="endRange"
+                  >7:30 PM</output
+                >
+              </div>
+              <input
+                id="endRange"
+                type="range"
+                min="15.5"
+                max="22"
+                step="0.5"
+                value="19.5"
+                aria-label="Choose the end time"
+              />
+              <p class="range-note">
+                3:30 PM <span style="float: right">10:00 PM</span>
+              </p>
+            </div>
+            <p class="time-summary" id="timeSummary" aria-live="polite">
+              From 5:30 PM to 7:30 PM
+            </p>
+          </div>
+          <button
+            class="btn confirm"
+            id="confirmBtn"
+            disabled
+            style="opacity: 0.55"
+          >
+            Save our date ♡
+          </button>
+          <p class="foot">
+            This just saves her choice on screen; you can confirm the details
+            together.
+          </p>
+        </section>
+        <section
+          id="success"
+          class="success hidden"
+          aria-live="polite"
+        ></section>
+      </article>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@5/dist/email.min.js"></script>
+    <script>
+      const EMAILJS_CONFIG = {
+        publicKey: "ha1Dsmck5Q2nFRLdB",
+        serviceId: "service_4lsxk8k",
+        templateId: "template_koo6gr9",
+      };
+      const emailReady = Object.values(EMAILJS_CONFIG).every(
+        (value) => value && !value.startsWith("YOUR_"),
+      );
+      if (emailReady && window.emailjs) {
+        emailjs.init({
+          publicKey: EMAILJS_CONFIG.publicKey,
+          limitRate: { id: "date-invite", throttle: 1000 },
+        });
+      }
+      let emailQueue = Promise.resolve();
+      function sendResponse(
+        answer,
+        details = {},
+        statusElement = document.querySelector("#emailStatus"),
+      ) {
+        if (!emailReady || !window.emailjs) {
+          statusElement.textContent =
+            "EmailJS still needs to be connected before this link is shared.";
+          return;
+        }
+        const params = {
+          name: "Fatima",
+          time: new Date().toLocaleString(),
+          message: [
+            `Answer: ${answer}`,
+            `Date plan: ${details.plan || "Not selected"}`,
+            `Date: ${details.date || "Not selected"}`,
+            `Available time: ${details.time || "Not selected"}`,
+          ].join(" · "),
+        };
+        statusElement.textContent = "Sending your answer to me…";
+        emailQueue = emailQueue
+          .then(() =>
+            emailjs.send(
+              EMAILJS_CONFIG.serviceId,
+              EMAILJS_CONFIG.templateId,
+              params,
+            ),
+          )
+          .then(() => {
+            statusElement.textContent = "I got your answer 💜";
+          })
+          .catch(() => {
+            statusElement.textContent =
+              "Couldn’t send just now. Please let Hamse know directly 💜";
+          });
+        return emailQueue;
+      }
+      const intro = document.querySelector("#intro"),
+        celebration = document.querySelector("#celebration"),
+        planner = document.querySelector("#planner"),
+        success = document.querySelector("#success"),
+        response = document.querySelector("#response"),
+        noBtn = document.querySelector("#noBtn");
+      let pickedPlan = "",
+        pickedDay = "",
+        pickedTime = "";
+      document.querySelector("#yesBtn").addEventListener("click", () => {
+        intro.classList.add("hidden");
+        celebration.classList.remove("hidden");
+        celebration.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+      document.querySelector("#continueBtn").addEventListener("click", () => {
+        celebration.classList.add("hidden");
+        planner.classList.remove("hidden");
+        planner.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      noBtn.addEventListener("pointerenter", () => {
+        noBtn.classList.remove("wiggle");
+        void noBtn.offsetWidth;
+        noBtn.classList.add("wiggle");
+      });
+      noBtn.addEventListener("animationend", () =>
+        noBtn.classList.remove("wiggle"),
+      );
+      let replyChoice = "Nyah!~ (not this time)";
+      noBtn.addEventListener("click", () => {
+        response.textContent =
+          "Aww, okay 💜 No pressure at all. Thanks for telling me. I made you say Nyah!~ after all 😉";
+        document.querySelector("#noOptions").classList.remove("hidden");
+        noBtn.classList.remove("wiggle");
+      });
+      document.querySelector("#maybeLaterBtn").addEventListener("click", () => {
+        replyChoice = "Maybe later, pookie";
+        sendResponse(replyChoice);
+        response.textContent = "Maybe later, pookie 💜 I’ll save you a spot.";
+        document.querySelector("#noOptions").classList.add("hidden");
+      });
+      document.querySelector("#dreamsBtn").addEventListener("click", () => {
+        replyChoice = "In your dreams, nigga";
+        sendResponse(replyChoice);
+        response.textContent = "In my dreams it is 😹 Thanks for making me smile.";
+        document.querySelector("#noOptions").classList.add("hidden");
+      });
+      document.querySelectorAll(".choice").forEach((b) =>
+        b.addEventListener("click", () => {
+          pickedPlan = b.dataset.plan;
+          document
+            .querySelectorAll(".choice")
+            .forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+          updateConfirm();
+        }),
+      );
+      const days = document.querySelector("#days"),
+        fmt = new Intl.DateTimeFormat(undefined, { weekday: "short" }),
+        numFmt = new Intl.DateTimeFormat(undefined, {
+          month: "short",
+          day: "numeric",
+        });
+      function dateKey(d) {
+        return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+      }
+      function chooseDay(key, button) {
+        pickedDay = key;
+        document.querySelectorAll(".day").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        updateConfirm();
+      }
+      for (let i = 1; i <= 14; i++) {
+        const d = new Date();
+        d.setDate(d.getDate() + i);
+        const key = dateKey(d),
+          b = document.createElement("button");
+        b.className = "day";
+        b.type = "button";
+        b.setAttribute("aria-pressed", "false");
+        b.innerHTML = `<span>${fmt.format(d)}</span><strong>${numFmt.format(d)}</strong>`;
+        b.addEventListener("click", () => chooseDay(key, b));
+        days.append(b);
+      }
+      const birthdayDay = document.querySelector("#birthdayDay");
+      const today = new Date();
+      today.setHours(0,0,0,0);
+      const birthday = new Date(today.getFullYear(), 9, 31, 12);
+      if (birthday < today) birthday.setFullYear(birthday.getFullYear() + 1);
+      birthdayDay.addEventListener("click", () => chooseDay(dateKey(birthday), birthdayDay));
+      const startRange = document.querySelector("#startRange"),
+        endRange = document.querySelector("#endRange");
+      function clockLabel(hour) {
+        const h = Math.floor(hour),
+          m = Math.round((hour - h) * 60),
+          period = h >= 12 ? "PM" : "AM",
+          shown = h % 12 || 12;
+        return `${shown}:${String(m).padStart(2, "0")} ${period}`;
+      }
+      function updateTime(changed) {
+        let start = Number(startRange.value),
+          end = Number(endRange.value);
+        if (changed === "start" && start >= end) {
+          end = start + 0.5;
+          endRange.value = String(end);
+        }
+        if (changed === "end" && end <= start) {
+          start = end - 0.5;
+          startRange.value = String(start);
+        }
+        endRange.min = String(start + 0.5);
+        document.querySelector("#startLabel").textContent = clockLabel(start);
+        document.querySelector("#endLabel").textContent = clockLabel(end);
+        document.querySelector("#timeSummary").textContent =
+          `From ${clockLabel(start)} to ${clockLabel(end)}`;
+        pickedTime = `From ${clockLabel(start)} to ${clockLabel(end)}`;
+        updateConfirm();
+      }
+      startRange.addEventListener("input", () => updateTime("start"));
+      endRange.addEventListener("input", () => updateTime("end"));
+      updateTime();
+      function updateConfirm() {
+        const b = document.querySelector("#confirmBtn"),
+          ready = !!(pickedPlan && pickedDay && pickedTime);
+        b.disabled = !ready;
+        b.style.opacity = ready ? "1" : ".55";
+      }
+      document.querySelector("#confirmBtn").addEventListener("click", () => {
+        const date = new Date(pickedDay + "T12:00:00").toLocaleDateString(
+          undefined,
+          { weekday: "long", month: "long", day: "numeric" },
+        );
+        planner.classList.add("hidden");
+        success.classList.remove("hidden");
+        success.innerHTML = `<div class="big">💜</div><h2>It’s a date!</h2><p>You picked <strong>${escapeHtml(pickedPlan)}</strong><br>for <strong>${escapeHtml(date)}</strong> at <strong>${escapeHtml(pickedTime)}</strong>.</p><p>Thanks for choosing, Fatima ♡ I’m excited for our time together!</p><p class="email-note">Your date choice will be sent to me.</p><p class="email-status" id="finalEmailStatus" aria-live="polite"></p><button class="reset" id="editBtn">Change my picks</button>`;
+        sendResponse(
+          "Yes! — date details selected",
+          { plan: pickedPlan, date, time: pickedTime },
+          document.querySelector("#finalEmailStatus"),
+        );
+        document.querySelector("#editBtn").addEventListener("click", () => {
+          success.classList.add("hidden");
+          planner.classList.remove("hidden");
+        });
+      });
+      function escapeHtml(s) {
+        return s.replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      }
+    </script>
+  </body>
+</html>
